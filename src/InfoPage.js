@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { history } from './index'
+
 
 export function infoPageReducer(state = '', action) {
   if (action.type === 'INFO_PAGE') {
@@ -10,7 +12,7 @@ export function infoPageReducer(state = '', action) {
 }
 
 function infoPageAction(payload) {
-  return { type: 'HOME_PAGE', payload }
+  return { type: 'INFO_PAGE', payload }
 }
 
 class InfoPage extends Component {
@@ -19,6 +21,7 @@ class InfoPage extends Component {
   }
   componentDidMount() {
     console.log('InfoPage componentDidMount')
+    this.props.infoPageAction('infoPage')
   }
   componentWillReceiveProps() {
     console.log('InfoPage componentWillReceiveProps')
@@ -28,7 +31,9 @@ class InfoPage extends Component {
   }
   render() {
     return (
-      <div>这是InfoPage</div>
+      <div onClick={() => history.goBack()}>
+        {`这是${this.props.page}`}
+      </div>
     )
   }
 }

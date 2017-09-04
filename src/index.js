@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
-  Link
 } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
@@ -33,17 +33,14 @@ const store = createStore(combineReducers({
   infoPage: infoPageReducer,
 }))
 
+export const history = createBrowserHistory()
+
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <div>
-            <ul>
-              <li><Link to="/homepage">HomePage</Link></li>
-              <li><Link to="/infopage">InfoPage</Link></li>
-            </ul>
-
             {routes.map((route, i) => (
               <RouteWithSubRoutes key={i} {...route}/>
             ))}
