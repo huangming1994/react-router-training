@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { history } from './index'
+import { homePageAction } from './HomePage'
 
 
 export function infoPageReducer(state = '', action) {
@@ -31,8 +32,19 @@ class InfoPage extends Component {
   }
   render() {
     return (
-      <div onClick={() => history.goBack()}>
+      <div>
         {`这是${this.props.page}`}
+        <ul>
+          <li
+            onClick={() => {
+              this.props.homePageAction('homePage 改变props的返回')
+              history.goBack()
+            }}
+          >
+            改变props返回
+          </li>
+          <li onClick={() => history.goBack()}>不改变props返回</li>
+        </ul>
       </div>
     )
   }
@@ -46,7 +58,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    infoPageAction: compose(dispatch, infoPageAction)
+    infoPageAction: compose(dispatch, infoPageAction),
+    homePageAction: compose(dispatch, homePageAction),
   }
 }
 

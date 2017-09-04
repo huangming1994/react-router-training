@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { history } from './index'
 
-export function homePageReducer(state = '', action) {
+export function homePageReducer(state = 'homePage', action) {
   if (action.type === 'HOME_PAGE') {
     return action.payload
   }
@@ -20,7 +20,6 @@ class HomePage extends Component {
   }
   componentDidMount() {
     console.log('HomePage componentDidMount')
-    this.props.homePageAction('homePage')
   }
   componentWillReceiveProps() {
     console.log('HomePage componentWillReceiveProps')
@@ -31,7 +30,9 @@ class HomePage extends Component {
   render() {
     console.log(this.props)
     return (
-      <div onClick={() => {history.push('/infopage')}}>
+      <div
+        onClick={() => {history.push('/infopage')}}
+      >
         {`这是${this.props.page}`}
       </div>
     )
@@ -39,6 +40,7 @@ class HomePage extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('state', state)
   return {
     page: state.homePage
   }
