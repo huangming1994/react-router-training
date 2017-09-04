@@ -28,7 +28,6 @@ class HomePage extends Component {
     console.log('HomePage componentWillUnmount')
   }
   render() {
-    console.log(this.props)
     return (
       <div
         onClick={() => {history.push('/infopage')}}
@@ -40,7 +39,6 @@ class HomePage extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state', state)
   return {
     page: state.homePage
   }

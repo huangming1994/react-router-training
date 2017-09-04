@@ -52,7 +52,7 @@ class InfoPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    page: state.infoPage
+    page: state.infoPage,
   }
 }
 
