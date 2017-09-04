@@ -14,8 +14,8 @@
 
 #### react-navigation VS  react-router
 本人做过rn开发和react开发，发现这两者的路由机制有点不同，写了两个demo做下对比。可以看下上个repo，关于react-navigation的测试，两者对比下来有以下区别：
-1. rn当中pop回某个页面时，只有props发生改变，组件才会rerender，react则是不管props发不发生改变都会rerender。
-2. rn当中A页面push到B，B页面pop回A，props发生改变时，componentWillReceiveProps是在A页面中被调用，而react-router同样的场景下，A页面却不会调用componentWillReceiveProps，A页面相当于是拿到了最新的数据初始render，这一点和rn很不一样。
-
+1. rn当中push不会销毁组件，react则是push和goBack都会销毁组件。
+2. rn当中pop回某个页面时，只有props发生改变，组件才会rerender，react则是不管props发不发生改变都会rerender。
+3. rn当中A页面push到B，B页面pop回A，props发生改变时，componentWillReceiveProps是在A页面中被调用，而react-router同样的场景下，A页面却不会调用componentWillReceiveProps，A页面相当于是拿到了最新的数据初始render，这一点和rn很不一样。
 
 #### 以上描述的可能会有些不清楚，感兴趣的朋友可以clone项目跑一遍，看控制台输出就容易明白多了。
