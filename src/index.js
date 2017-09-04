@@ -4,9 +4,11 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
-import InfoPage from './InfoPage'
-import HomePage from './HomePage'
+import InfoPage, { infoPageReducer } from './InfoPage'
+import HomePage, { homePageReducer } from './HomePage'
 
 const routes = [
   {
@@ -26,21 +28,28 @@ const RouteWithSubRoutes = (route) => (
   )}/>
 )
 
+const store = createStore(combineReducers({
+  homePage: homePageReducer,
+  infoPage: infoPageReducer,
+}))
+
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div>
-          <ul>
-            <li><Link to="/homepage">HomePage</Link></li>
-            <li><Link to="/infopage">InfoPage</Link></li>
-          </ul>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <ul>
+              <li><Link to="/homepage">HomePage</Link></li>
+              <li><Link to="/infopage">InfoPage</Link></li>
+            </ul>
 
-          {routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route}/>
-          ))}
-        </div>
-      </Router>
+            {routes.map((route, i) => (
+              <RouteWithSubRoutes key={i} {...route}/>
+            ))}
+          </div>
+        </Router>
+      </Provider>
     )
   }
 }

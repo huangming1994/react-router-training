@@ -1,4 +1,17 @@
 import React, { Component } from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+
+export function homePageReducer(state = '', action) {
+  if (action.type === 'INFO_PAGE') {
+    return action.payload
+  }
+  return state
+}
+
+export function homePageAction(payload) {
+  return { type: 'HOME_PAGE', payload }
+}
 
 class HomePage extends Component {
   componentWillMount() {
@@ -20,4 +33,15 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage
+function mapStateToProps(state) {
+  return {
+    page: state.homePage
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    homePageAction: compose(dispatch, homePageAction)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
